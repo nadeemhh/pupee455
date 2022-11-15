@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+ <button class="fetchformdata">fetch</button>
+
+  <script>
+
+let originurl=window.location.origin;
+console.log('originurl',originurl)
+
+function form_data() {
+  
+  fetch(`${originurl}/formdata`,{
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json, text/plain, */*',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({scriptname:'AAP'})
+})
+.then(response => {return response.text()})
+.then(data => {
+  console.log(data)
+
+  const below = document.querySelector("body");
+
+let html = `${data}`;
+
+below.insertAdjacentHTML("beforeend", html);
+
+})
+.catch(err => {
+  console.log(err)
+})
+
+}
+
+document.querySelector('.fetchformdata').addEventListener('click',function () {
+  form_data()
+
+})
+  </script>
+</body>
+</html>
